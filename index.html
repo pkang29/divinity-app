@@ -11,8 +11,32 @@
 
 </head>
 <body>
+  
+  <form>
+    <div class="search div">
+      <p>
+        Enter the name of the item you're searching for:
+      </p>
+      <input type="text" id="item-text" name="itemName">
+    </div>
+    <p>A note on Runes: making a rune one size larger follows a consistent pattern involving a rune of the same type (Fire, Frost, etc) as well as the other ingredients.  </p>
+    <p>To search for a rune of any other size than 'small', enter 'Size % rune': 'medium % rune', .e.g. </p>
+    <button onclick="submitForm()">Submit</button>
 
+  </form>
 
-<script src="parsedata.js"></script>
+  <h1>Recipes:</h1>
+
+  <section id="matched-results">
+    
+  </section>
+  
+  <h1>Ingredient In:</h1>
+  
+  <section id="ingredients-results">
+    
+  </section>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="index.js"></script>
 </body>
 </html>

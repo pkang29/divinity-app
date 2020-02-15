@@ -1,3 +1,4 @@
+const axios = require('axios');
 var data = {
     "version": "1.0",
     "encoding": "UTF-8",
@@ -99304,6 +99305,7 @@ var data = {
   
 function appendData(arr) {
     var cell ='gs$cell';
+    
     function sortDataIntoArray(datum){
         var currentRow = 0;
         var arrayFromData = [];
@@ -99327,18 +99329,40 @@ function appendData(arr) {
     function sortArrayIntoLists(arr){
         for(var i=0; i<arr.length;i++){
             var recipe = arr[i].slice(1,arr[i].length-1);
-            var result = recipe[0];
-            console.log(result);
-            for(var j=1; j<recipe.length; j++){
-                ]
-            }
+            var resultOfRecipe = recipe[0];
+            var ing1 = recipe[1];
+            var ing2 = recipe[2];
+            var ing3 = recipe[3];
+            var ing4 = recipe[4];
+            var ing5 = recipe[5];
+
+            addRecipeToDatabase(resultOfRecipe, ing1, ing2, ing3, ing4, ing5);
         }
     }
+
+    function addRecipeToDatabase(result, ing1='', ing2='', ing3='', ing4='', ing5='') {
+      const data = {
+        result: result,
+        ing1: ing1,
+        ing2: ing2,
+        ing3: ing3,
+        ing4: ing4,
+        ing5: ing5
+      };
+
+      axios.post('http://localhost:5000/post/', 
+      data)
+      .then(function(res){
+        console.log(res);
+      })
+      .catch(function(err) {
+        console.error(err);
+      });
+    }
     
-    sortArrayIntoLists(sortDataIntoArray(arr));
-    
+    var dataArray = sortDataIntoArray(arr);
+    var list = sortArrayIntoLists(dataArray);
+    return;
 }
 
-
-
-console.log(appendData(data));
+appendData(data);
