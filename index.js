@@ -5,6 +5,8 @@ function submitForm(){
     document.getElementById('matched-results').innerHTML = '';
     document.getElementById('ingredients-results').innerHTML = '';
     var searchText = document.getElementById('item-text').value.trim();
+    
+    
     axios.get(url, {
         params: {
             searchText: searchText

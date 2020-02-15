@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const connection = require('./database');
 const router = express.Router();
 const cors = require('cors');
+const mysql = require('mysql');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:false}));
@@ -45,7 +46,10 @@ app.post('/post/', function(req, res){
 app.get('/search', function(req, res){
     var searchText = req.query.searchText;
     var sql=`SELECT * FROM recipes WHERE result = ? OR ing1 = ? OR ing2 = ? OR ing3 = ? OR ing4 = ? OR ing5 = ?`
-    connection.query(sql, [searchText, searchText, searchText, searchText, searchText, searchText], function(error,result){
+    var inserts=[searchText, searchText, searchText, searchText, searchText, searchText];
+    
+    sql = mysql.format(sql, inserts);
+    connection.query(sql, function(error,result){
         if(error) throw error;
         
         res.send(result);
